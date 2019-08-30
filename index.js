@@ -13,7 +13,6 @@ const setSecretKey = (secreteKey)=>{
 }
 
 
-
 let createJWTToken = (payload={user, role, inageId, userID}, expiresIn ) => {
 
     return new Promise ((resolve, reject)=>{
