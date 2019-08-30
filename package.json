@@ -1,0 +1,30 @@
+{
+  "name": "validatejwt",
+  "version": "1.0.0",
+  "description": "This is forvalidadting jwt with usergroups and roles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umeshramya/validatejwt.git"
+  },
+  "keywords": [
+    "jwt",
+    "user",
+    "groups",
+    "role"
+  ],
+  "author": "Dr Umesh R Bilagi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/umeshramya/validatejwt/issues"
+  },
+  "homepage": "https://github.com/umeshramya/validatejwt#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "query-string": "^6.8.2",
+    "user-groups-roles": "^2.0.4"
+  }
+}
