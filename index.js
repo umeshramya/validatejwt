@@ -1,6 +1,8 @@
 "use strict";
 const role = require("user-groups-roles");
 const jwt = require("jsonwebtoken");
+const roles = require("user-groups-roles")
+const jsonwebtoken = require("jsonwebtoken")
 
  let SECRETE_KEY ="";
 
@@ -67,6 +69,8 @@ let validateAuth = (req, res, next) => {
 
 
 
+
+
 module.exports={
-    setSecretKey, createJWTToken, validateAuth
+    setSecretKey, createJWTToken, validateAuth, roles, jsonwebtoken
 }
