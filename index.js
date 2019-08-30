@@ -1,17 +1,13 @@
 "use strict";
 const role = require("user-groups-roles");
 const jwt = require("jsonwebtoken");
-const roles = require("user-groups-roles")
-const jsonwebtoken = require("jsonwebtoken")
+const roles = require("user-groups-roles");
+const jsonwebtoken = require("jsonwebtoken");
 
- let SECRETE_KEY ="";
+let SECRETE_KEY = "";
 
 const setSecretKey = (secreteKey)=>{
-    if(SECRETE_KEY === ""){
-        SECRETE_KEY = secreteKey;
-    }else{
-        throw  "can not reset secrete key, because it is already set";
-    }
+    SECRETE_KEY = secreteKey;
 }
 
 
