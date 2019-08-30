@@ -14,29 +14,60 @@ const setSecretKey = (secreteKey)=>{
 
 
 
-let createJWTToken = ({user, role, inageId, userID}, expiresIn ,  res) => {
-    jwt.sign({ user, role }, SECRETKEY, { expiresIn: expiresIn }, (err, token) => {
+let createJWTToken = (payload={user, role, inageId, userID}, expiresIn ) => {
 
-        if (err) {
-            res.status(500).send("Invalid Token")
-        } else {
+    return new Promise ((resolve, reject)=>{
+        jwt.sign(payload, SECRETE_KEY, {expiresIn : expiresIn},(err, token)=>{
+            if(err){
+                reject(err)
+            }else{
+                resolve(token);
+            }
+        })
 
-            res.status(200).json({
-                user: user,
-                role: role,
-                token: token,
-                imageId : imageId,
-                message : "Login succusfull"
-            })
-        }
+
     })
+
+}
+
+let validateAuth = (req, res, next) => {
+    let bearerHeader = req.headers['authorization'];
+    let bearerToken;
+    if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(' ');
+        bearerToken = bearer[1];
+    }else if(queryString.parseUrl(req.url).query.token){
+        bearerToken = queryString.parseUrl(req.url).query.token;
+    }
+    
+    if (bearerToken) {
+        jwt.verify(bearerToken, SECRETKEY, (err, jwtPayload) => {
+            if (err) {
+                res.status(403).send("Forbidden")
+            } else {
+                req.jwtPayload = jwtPayload
+                // for role permission
+                
+                let curUrl = `${req.baseUrl}${req.route.path}`;
+                let curRole = jwtPayload.role
+
+                req.permission = role.getRoleRoutePrivilegeValue(curRole, curUrl, req.method)
+                
+                if (req.permission === false) {
+                    res.status(403).send("Forbidden")
+                } else {
+                    next();
+                }
+            }
+        })
+
+    } else {
+        res.sendStatus(403);
+    }
 }
 
 
 
-
-
-
 module.exports={
-    setSecretKey, createJWTToken
+    setSecretKey, createJWTToken, validateAuth
 }
