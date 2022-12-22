@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/umeshramya/validatejwt#readme",
   "dependencies": {
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "query-string": "^6.8.2",
     "user-groups-roles": "^2.0.4"
   }
